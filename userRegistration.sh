@@ -23,25 +23,26 @@ emailValidator () {
 }
 
 mobileValidator () {
-        mobile_patt="^[0-9]{2} [1-9][0-9]{9}$"
-        if [[ $1 =~ $mobile_patt ]]
-        then
-                echo 1
-        else
-                echo 0
-        fi
+	mobile_patt="^[0-9]{2} [1-9][0-9]{9}$"
+	if [[ $* =~ $mobile_patt ]]
+	then
+			echo 1
+	else
+			echo 0
+	fi
 }
 
 passwordValidator () {
-        passwordLengthPat="^[a-zA-Z0-9]{8,}$"
-        passwordCasePat="[a-zA-Z0-9]*[A-Z][a-zA-Z0-9]*"
-        passwordNumPat="[a-zA-Z0-9]*[0-9][a-zA-Z0-9]*"
-        if [[ $1 =~ $passwordLengthPat && $1 =~ $passwordCasePat && $1 =~ $passwordNumPat ]]
-        then
-                echo 1
-        else
-                echo 0
-        fi
+	passwordLengthPat="^[a-zA-Z0-9@#$%&=*_-]{8,}"
+	passwordCasePat="[a-zA-Z0-9]*[A-Z][a-zA-Z0-9]*"
+	passwordNumPat="[a-zA-Z0-9]*[0-9][a-zA-Z0-9]*"
+	passwordSpecialPat="[a-zA-Z0-9]*[@#$%&=_*-][a-zA-Z0-9]*"
+	if [[ $1 =~ $passwordLengthPat && $1 =~ $passwordCasePat && $1 =~ $passwordNumPat && $1 =~ $passwordSpecialPat ]]
+	then
+			echo 1
+	else
+			echo 0
+	fi
 }
 
 read -p "Enter first name (with Capital first letter) " firstName
@@ -52,7 +53,7 @@ then
 else
 	echo "Invalid First Name"
 fi
-read -p "Enter first name (with Capital first letter) " lastName
+read -p "Enter last name (with Capital first letter) " lastName
 
 isCorrect=`nameValidator $lastName`
 if [ $isCorrect -eq 1 ]
@@ -70,8 +71,8 @@ then
 else
 	echo "Invalid Email"
 fi
-read -p "Enter Mobile Number " mobileNo
 
+read -p "Enter Mobile Number " mobileNo
 isCorrect=`mobileValidator $mobileNo`
 if [ $isCorrect -eq 1 ]
 then
