@@ -24,7 +24,7 @@ emailValidator () {
 
 mobileValidator () {
         mobile_patt="^[0-9]{2} [1-9][0-9]{9}$"
-        if [[ $* =~ $mobile_patt ]]
+        if [[ $1 =~ $mobile_patt ]]
         then
                 echo 1
         else
@@ -32,6 +32,15 @@ mobileValidator () {
         fi
 }
 
+passwordValidator () {
+        password_patt="^[a-zA-Z0-9]{8,}$"
+        if [[ $1 =~ $password_patt ]]
+        then
+                echo 1
+        else
+                echo 0
+        fi
+}
 
 read -p "Enter first name (with Capital first letter) " firstName
 isCorrect=`nameValidator $firstName`
@@ -67,4 +76,13 @@ then
 	echo "Valid Mobile Number"
 else
 	echo "Invalid Mobile Number"
+fi
+
+read -p "Enter password " password
+isCorrect=`passwordValidator $password`
+if [ $isCorrect -eq 1 ]
+then
+	echo "Valid Password"
+else
+	echo "Invalid Password"
 fi
