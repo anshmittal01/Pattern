@@ -35,7 +35,8 @@ mobileValidator () {
 passwordValidator () {
         passwordLengthPat="^[a-zA-Z0-9]{8,}$"
         passwordCasePat="[a-zA-Z0-9]*[A-Z][a-zA-Z0-9]*"
-        if [[ $1 =~ $passwordLengthPat && $1 =~ $passwordCasePat ]]
+        passwordNumPat="[a-zA-Z0-9]*[0-9][a-zA-Z0-9]*"
+        if [[ $1 =~ $passwordLengthPat && $1 =~ $passwordCasePat && $1 =~ $passwordNumPat ]]
         then
                 echo 1
         else
